@@ -1,0 +1,7 @@
+.root {
+  @apply bg-gradient-to-tl from-indigo-500 min-h-screen relative to-pink-500 via-purple-500;
+}
+
+.background {
+  @apply bg-[url('/bg.svg')] bg-no-repeat bg-top bottom-0 fixed left-0 min-h-screen pointer-events-none right-0 top-0;
+}

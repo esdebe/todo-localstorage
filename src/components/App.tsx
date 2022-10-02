@@ -1,7 +1,9 @@
 import './App.css'
+import { RouterProvider } from 'react-router-dom'
+import Router from '@components/Router'
 
 function App() {
-  return <div className="text-center">Todo Localstorage</div>
+  return <RouterProvider router={Router} />
 }
 
 export default App
