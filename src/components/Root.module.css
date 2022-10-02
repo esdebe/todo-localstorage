@@ -1,7 +1,7 @@
 .root {
-  @apply bg-gradient-to-tl from-indigo-500 min-h-screen relative to-pink-500 via-purple-500;
+  @apply bg-gradient-to-tl from-blue-100 min-h-screen relative to-blue-200 via-blue-300 pt-10 pb-10;
 }
 
 .background {
-  @apply bg-[url('/bg.svg')] bg-no-repeat bg-top bottom-0 fixed left-0 min-h-screen pointer-events-none right-0 top-0;
+  @apply bg-[url("/bg.svg")] bg-no-repeat bg-center bottom-0 fixed left-0 min-h-screen pointer-events-none right-0 top-0 h-full max-h-full max-w-xs mx-auto opacity-50;
 }

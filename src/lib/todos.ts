@@ -4,8 +4,9 @@ import storage from '@lib/storage'
 import { immer } from 'zustand/middleware/immer'
 import * as env from '@lib/env'
 import { nanoid } from 'nanoid'
-import _ from 'lodash'
+import isEqual from 'lodash/isEqual'
 import { useCallback } from 'react'
+import dayjs from 'dayjs'
 
 export const todoPriority = {
   unset: 0,
@@ -23,6 +24,8 @@ export type Todo = {
   title: string
   complete: boolean
   priority: TodoPriority
+  created: string
+  updated?: string
 }
 
 type States = {
@@ -42,7 +45,6 @@ export type AddTodoParams = OptionalExceptFor<Pick<Todo, 'title' | 'priority'>, 
 export type UpdateTodoParams = OptionalExceptFor<Todo, 'id'>
 
 type Actions = {
-  sorted: (key?: string, order?: 'asc' | 'desc') => Todo[]
   addTodo: (value: AddTodoParams) => void
   updateTodo: (value: UpdateTodoParams) => void
   removeTodo: (id?: string) => void
@@ -67,13 +69,9 @@ const initialState: States = {
   medium: 0,
 }
 
-const todoStore: Initializer = (set, get) => {
+const todoStore: Initializer = (set) => {
   return {
     ...initialState,
-    sorted: (sort = 'title', order = 'asc') => {
-      const sortOrder = _.orderBy(get().todos, [sort], [order])
-      return sortOrder
-    },
     addTodo: (params) =>
       set((draft: States) => {
         draft.todos.unshift({
@@ -81,6 +79,7 @@ const todoStore: Initializer = (set, get) => {
           id: nanoid(),
           priority: params.priority ?? todoPriority.low,
           title: params.title,
+          created: dayjs().unix().toString(),
         })
       }),
     updateTodo: (params) =>
@@ -91,6 +90,7 @@ const todoStore: Initializer = (set, get) => {
           nextState.todos[index].complete = params.complete ?? nextState.todos[index].complete
           nextState.todos[index].title = params.title ?? nextState.todos[index].title
           nextState.todos[index].priority = params.priority ?? nextState.todos[index].priority
+          nextState.todos[index].updated = dayjs().unix().toString()
         }
       }),
     toggleTodo: (id) =>
@@ -124,15 +124,17 @@ export const useTodosStore = create<TodosStore>()(
 
 export const useTodo = () => {
   const selector = useCallback((state: TodosStore) => state, [])
-  const { addTodo, todos, removeTodo, toggleTodo, removeCompletedTodo, sorted, updateTodo } =
-    useTodosStore(selector, (prev, next) => _.isEqual(prev.todos, next.todos))
+  const { addTodo, todos, removeTodo, toggleTodo, removeCompletedTodo, updateTodo } = useTodosStore(
+    selector,
+    (prev, next) => isEqual(prev.todos, next.todos)
+  )
+
   return {
     addTodo,
     todos,
     removeTodo,
     toggleTodo,
     removeCompletedTodo,
-    sorted,
     updateTodo,
   }
 }

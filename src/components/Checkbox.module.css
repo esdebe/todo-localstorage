@@ -1,0 +1,27 @@
+.root {
+  @apply cursor-pointer h-6 inline-block relative text-[0px] w-6;
+}
+
+.track {
+  @apply absolute bg-white block h-full rounded-full w-full;
+}
+
+.trackFocusVisible {
+  @apply bg-slate-300 border-2 border-slate-400;
+}
+
+.thumb {
+  @apply bg-white block h-6 absolute rounded-full transition-transform w-6;
+}
+
+.thumbChecked {
+  @apply bg-slate-700;
+}
+
+.input {
+  @apply absolute bg-transparent bottom-0 cursor-pointer h-full left-0 m-0 opacity-0 right-0 top-0 w-full z-10;
+}
+
+.svg {
+  @apply h-6 w-6 text-black absolute;
+}

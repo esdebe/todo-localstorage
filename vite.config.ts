@@ -18,6 +18,7 @@ export default defineConfig({
     chunkSplitPlugin({
       strategy: 'unbundle',
       customSplitting: {
+        'vendor-primary': ['react', 'react-dom', 'framer-motion', 'localforage'],
         '@components': [/src\/components/],
         '@lib': [/src\/lib/],
       },

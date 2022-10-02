@@ -1,0 +1,30 @@
+.root {
+  @apply w-6 h-12 flex flex-col scale-[0.75];
+}
+
+.button {
+  @apply w-6 h-6 border-0;
+  &:focus {
+    @apply outline-none;
+    path {
+      @apply fill-white;
+    }
+  }
+}
+
+.buttonActive {
+  path {
+    @apply fill-white;
+  }
+}
+
+.buttonFocus {
+  @apply outline-none;
+  path {
+    @apply fill-white;
+  }
+}
+
+.svg {
+  @apply w-full h-full;
+}

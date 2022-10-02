@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply overflow-y-scroll;
+    @apply font-light;
   }
 }

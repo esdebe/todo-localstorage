@@ -1,0 +1,19 @@
+.root {
+  @apply w-full;
+}
+
+.errorTitle input {
+  @apply border-red-400;
+
+  &:hover {
+    @apply border-red-400;
+  }
+
+  &:focus {
+    @apply border-red-400;
+  }
+}
+
+.submit {
+  @apply mt-4;
+}
