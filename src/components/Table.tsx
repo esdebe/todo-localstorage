@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useTodo, Todo } from '@lib/todos'
 import { useSorter } from '@lib/sorter'
 import { Checkbox } from '@components/Checkbox'
@@ -7,10 +8,13 @@ import {
   getCoreRowModel,
   useReactTable,
   createColumnHelper,
+  HeaderGroup,
+  Cell,
 } from '@tanstack/react-table'
 import clsx from 'clsx'
 import { useSorting } from '@lib/sorting'
 import classes from '@components/Table.module.css'
+import { Button } from '@components/Button'
 
 const columnHelper = createColumnHelper<Todo>()
 
@@ -34,12 +38,27 @@ function CheckboxCol(props: any) {
   )
 }
 
+function DeleteCol(props: any) {
+  const { info } = props
+  const { removeTodo } = useTodo()
+  return (
+    <Button className={classes.deleteButton} onClick={() => removeTodo(info.row.original.id)}>
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        data-testid="DeleteOutlineIcon"
+        aria-label="fontSize large"
+      >
+        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5-1-1h-5l-1 1H5v2h14V4z" />
+      </svg>
+    </Button>
+  )
+}
+
 const columns = [
-  columnHelper.accessor('complete', {
-    header: '',
+  columnHelper.display({
+    id: 'radio',
     cell: (info) => <CheckboxCol value={info.row.original} />,
-    enableSorting: false,
-    sortDescFirst: false,
   }),
   columnHelper.accessor('title', {
     header: 'Title',
@@ -49,6 +68,10 @@ const columns = [
   columnHelper.accessor('priority', {
     header: 'Priority',
     cell: (info) => ({ 1: 'High', 2: 'Medium', 3: 'Low', 0: 'Not Set' }[info.getValue()]),
+  }),
+  columnHelper.display({
+    id: 'del',
+    cell: (info) => <DeleteCol info={info} />,
   }),
 ]
 
@@ -64,36 +87,42 @@ export function Table() {
     manualSorting: true,
   })
 
+  const renderBodyContent = React.useCallback(
+    (cell: Cell<Todo, unknown>) => (
+      <td key={cell.id} className={classes.content}>
+        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+      </td>
+    ),
+    []
+  )
+
+  const renderHead = React.useCallback(
+    (headerGroup: HeaderGroup<Todo>) => (
+      <tr key={headerGroup.id}>
+        {headerGroup.headers.map((header) =>
+          header.column.columnDef.header === '' ? null : (
+            <th
+              key={header.id}
+              colSpan={header.column.columnDef.header === 'Title' ? 2 : undefined}
+            >
+              <div className={classes.header}>
+                <span>{flexRender(header.column.columnDef.header, header.getContext())}</span>
+                {header.column.getCanSort() && <Sort header={header} />}
+              </div>
+            </th>
+          )
+        )}
+      </tr>
+    ),
+    []
+  )
+
   return (
     <table className={classes.root}>
-      <thead>
-        {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map((header) =>
-              header.column.columnDef.header === '' ? null : (
-                <th
-                  key={header.id}
-                  colSpan={header.column.columnDef.header === 'Title' ? 2 : undefined}
-                >
-                  <div className={classes.header}>
-                    <span>{flexRender(header.column.columnDef.header, header.getContext())}</span>
-                    {header.column.getCanSort() && <Sort header={header} />}
-                  </div>
-                </th>
-              )
-            )}
-          </tr>
-        ))}
-      </thead>
+      <thead>{table.getHeaderGroups().map(renderHead)}</thead>
       <tbody>
         {table.getRowModel().rows.map((row) => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map((cell) => (
-              <td key={cell.id} className={classes.content}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
-            ))}
-          </tr>
+          <tr key={row.id}>{row.getVisibleCells().map(renderBodyContent)}</tr>
         ))}
       </tbody>
     </table>

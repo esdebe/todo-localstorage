@@ -17,10 +17,11 @@ export const Button = React.forwardRef(
         type="button"
         {...getRootProps()}
         className={clsx({
+          buttonRoot: true,
+          [`${className}`]: className,
           [classes.root]: true,
           [classes.focusVisible]: focusVisible,
           [classes.active]: active,
-          [`${className}`]: className,
         })}
       >
         <span className={clsx({ [classes.ripple]: true, [classes.activeRipple]: active })} />

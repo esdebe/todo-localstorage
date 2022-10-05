@@ -14,6 +14,10 @@
           }
         }
 
+        &:nth-child(2) {
+          @apply min-w-[10rem];
+        }
+
         &:last-child {
           @apply rounded-tr-md rounded-br-md;
         }
@@ -44,6 +48,10 @@
   @apply bg-blue-300 h-4;
 
   &:first-child {
+    @apply hidden;
+  }
+
+  &:nth-child(2) {
     @apply rounded-tl-lg rounded-bl-lg w-2/3;
   }
 
@@ -70,4 +78,16 @@
 
 .completed {
   @apply line-through;
+}
+
+.deleteButton {
+  @apply w-8 h-8 rounded-full p-0 mx-2 !important;
+
+  svg {
+    @apply w-8 h-8 scale-75;
+
+    path {
+      @apply fill-white;
+    }
+  }
 }

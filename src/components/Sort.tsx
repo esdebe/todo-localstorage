@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useButton } from '@mui/base'
 import classes from '@components/Sort.module.css'
 

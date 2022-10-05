@@ -4,8 +4,10 @@
 
 .button {
   @apply w-6 h-6 border-0;
+
   &:focus {
     @apply outline-none;
+
     path {
       @apply fill-white;
     }
@@ -20,6 +22,7 @@
 
 .buttonFocus {
   @apply outline-none;
+
   path {
     @apply fill-white;
   }
