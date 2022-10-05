@@ -28,6 +28,6 @@
       ],
     },
   },
-  "include": ["src"],
+  "include": ["src", "e2e/*.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

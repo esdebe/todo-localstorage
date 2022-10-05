@@ -20,3 +20,9 @@ pnpm run test
 ```sh
 pnpm run test:ui
 ```
+
+## E2E Test
+
+```sh
+pnpm run e2e
+```
