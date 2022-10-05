@@ -10,3 +10,13 @@
 - copy ```.env.example``` file to ```.env``` file, fill the placeholder value.
 - ```pnpm install```.
 - ```pnpm run dev```.
+
+## Unit Test
+
+```sh
+pnpm run test
+```
+
+```sh
+pnpm run test:ui
+```

@@ -59,7 +59,7 @@ type Initializer = StateCreator<
   [['zustand/persist', unknown], ['zustand/immer', never]]
 >
 
-const initialState: States = {
+export const initialState: States = {
   todos: [],
   completed: 0,
   count: 0,

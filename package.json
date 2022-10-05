@@ -12,7 +12,10 @@
     "lint:fix": "eslint --fix --ext .ts,.tsx \"./src/**/*.{ts,tsx}\"",
     "stylelint": "stylelint \"./src/**/*.css\"",
     "stylelint:fix": "stylelint --fix \"./src/**/*.css\"",
-    "ncu": "ncu -u --deep --timeout=90000"
+    "ncu": "ncu -u --deep --timeout=90000",
+    "e2e": "npx playwright test",
+    "test": "vite build && vitest",
+    "test:ui": "vite build && vitest --ui"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.8",

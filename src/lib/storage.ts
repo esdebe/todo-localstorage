@@ -2,7 +2,7 @@ import { StateStorage } from 'zustand/middleware'
 import localforage from 'localforage'
 import * as env from '@lib/env'
 
-const instance = localforage.createInstance({
+export const instance = localforage.createInstance({
   name: env.storage_name,
 })
 
