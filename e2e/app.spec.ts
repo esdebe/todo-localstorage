@@ -18,6 +18,10 @@ test.describe('Todo App', () => {
     expect(headerCount).toEqual(1)
     expect(headerText).toEqual('Todo')
 
+    const buttonCreate = page.locator('button:has-text("Add New")')
+    expect(await buttonCreate.count()).toEqual(1)
+    await buttonCreate.click()
+
     const inputTitle = page.locator('[placeholder="Whats Next \\?"]')
     await inputTitle.fill('first todo')
     const inputTitleValue = await inputTitle.inputValue()
@@ -25,7 +29,7 @@ test.describe('Todo App', () => {
 
     const buttonFooter = page.locator('button:has-text("Remove Completed")')
     const buttonFooterText = await buttonFooter.textContent()
-    expect(buttonFooterText).toContain('(0)')
+    expect(buttonFooterText).toContain('(0/0)')
 
     const buttonHigh = page.locator('button[title="High"]')
     expect(await buttonHigh.count()).toEqual(1)
@@ -39,7 +43,7 @@ test.describe('Todo App', () => {
 
     const buttonFooterAfter = page.locator('button:has-text("Remove Completed")')
     const buttonFooterAfterText = await buttonFooterAfter.textContent()
-    expect(buttonFooterAfterText).toContain('(1)')
-    await page.locator('text=Remove Completed (1)').click()
+    expect(buttonFooterAfterText).toContain('(1/1)')
+    await page.locator('text=Remove Completed (1/1)').click()
   })
 })

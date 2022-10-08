@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useTodo, Todo } from '@lib/todos'
+import { useUisStore } from '@lib/ui'
 import { useSorter } from '@lib/sorter'
 import { Checkbox } from '@components/Checkbox'
 import { Sort } from '@components/Sort'
@@ -38,20 +39,33 @@ function CheckboxCol(props: any) {
   )
 }
 
-function DeleteCol(props: any) {
+function ActionCol(props: any) {
   const { info } = props
   const { removeTodo } = useTodo()
+  const editForm = useUisStore((state) => state.editForm)
   return (
-    <Button className={classes.deleteButton} onClick={() => removeTodo(info.row.original.id)}>
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        data-testid="DeleteOutlineIcon"
-        aria-label="fontSize large"
-      >
-        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5-1-1h-5l-1 1H5v2h14V4z" />
-      </svg>
-    </Button>
+    <React.Fragment>
+      <Button className={classes.deleteButton} onClick={() => removeTodo(info.row.original.id)}>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          data-testid="DeleteOutlineIcon"
+          aria-label="fontSize large"
+        >
+          <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5-1-1h-5l-1 1H5v2h14V4z" />
+        </svg>
+      </Button>
+      <Button className={classes.deleteButton} onClick={() => editForm(info.row.original)}>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          data-testid="DeleteOutlineIcon"
+          aria-label="fontSize large"
+        >
+          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+        </svg>
+      </Button>
+    </React.Fragment>
   )
 }
 
@@ -71,7 +85,7 @@ const columns = [
   }),
   columnHelper.display({
     id: 'del',
-    cell: (info) => <DeleteCol info={info} />,
+    cell: (info) => <ActionCol info={info} />,
   }),
 ]
 

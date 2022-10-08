@@ -5,13 +5,8 @@
     @apply bg-blue-400;
   }
 
-  &:first-of-type {
-    @apply rounded-tl-md rounded-bl-md;
-  }
-
-  &:last-of-type {
-    @apply rounded-tr-md rounded-br-md;
-  }
+  @apply rounded-tl-md rounded-bl-md;
+  @apply rounded-tr-md rounded-br-md;
 }
 
 .active {

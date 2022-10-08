@@ -30,7 +30,7 @@ const config: PlaywrightTestConfig = {
     },
   ],
   webServer: {
-    command: `npx vite build && npx vite preview --port ${envPort}`,
+    command: `pnpm run build && pnpm run preview --port ${envPort}`,
     port: envPort,
   },
 }

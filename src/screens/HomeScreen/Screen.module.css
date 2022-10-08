@@ -10,6 +10,18 @@
   @apply my-4 border-0 h-[1px] bg-black opacity-10;
 }
 
+.dividerVertical {
+  @apply mx-4 border-0 w-[1px] bg-black opacity-10 h-10;
+}
+
+.col {
+  @apply flex flex-row flex-1;
+
+  button {
+    @apply flex-1;
+  }
+}
+
 .footer {
   @apply text-xs font-mono text-center text-slate-500;
 }

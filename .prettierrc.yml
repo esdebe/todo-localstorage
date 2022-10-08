@@ -6,9 +6,13 @@ singleQuote: true
 trailingComma: es5
 bracketSpacing: true
 proseWrap: preserve
-parser: typescript
 overrides:
+  - files: src/**/*.ts
+    options:
+      parser: typescript
+  - files: src/**/*.tsx
+    options:
+      parser: typescript
   - files: src/**/*.css
     options:
       singleQuote: false
-      parser: postcss

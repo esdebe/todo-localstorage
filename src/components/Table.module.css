@@ -1,3 +1,15 @@
+.header span {
+  @apply flex-1 text-xl font-light text-white;
+}
+
+.content {
+  @apply font-light leading-loose;
+
+  & > span {
+    @apply font-light leading-loose;
+  }
+}
+
 .root {
   @apply w-full table-auto;
 
@@ -62,18 +74,6 @@
 
 .header {
   @apply flex flex-row w-full py-1 px-2 h-12 items-center;
-}
-
-.header span {
-  @apply flex-1 text-xl font-light text-white;
-}
-
-.content {
-  @apply font-light leading-loose;
-
-  & > span {
-    @apply font-light leading-loose;
-  }
 }
 
 .completed {

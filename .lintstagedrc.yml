@@ -1,0 +1,4 @@
+"**/*.+(ts|tsx)":
+  - pnpm run lint:ts --fix
+"**/*.+(css)":
+  - pnpm run lint:style --fix

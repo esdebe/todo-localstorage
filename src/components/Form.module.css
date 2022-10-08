@@ -17,3 +17,7 @@
 .submit {
   @apply mt-4;
 }
+
+.cancel {
+  @apply mt-4 mx-4;
+}

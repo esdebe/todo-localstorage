@@ -1,6 +1,7 @@
 {
   "extends": [
-    "stylelint-config-standard"
+    "stylelint-config-standard",
+    "stylelint-prettier/recommended"
   ],
   "rules": {
     "at-rule-no-unknown": [
@@ -16,8 +17,6 @@
       }
     ],
     "declaration-block-trailing-semicolon": null,
-    "no-descending-specificity": null,
-    "selector-class-pattern": null,
-    "max-line-length": null
+    "selector-class-pattern": null
   }
 }
